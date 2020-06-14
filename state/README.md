@@ -116,7 +116,7 @@ Pra cada provider esse gerenciamento pode ser realizado de forma específica. Se
 
 Vamos tentar simplificar. 
 
-Para a gestão do estado dos recursos utilizados pela FIEMG, vamos utilizar o provedor da **Azure**, sendo assim a configuração do gestor de estado remoto que escolheremos para ser utilizado no terraform será o **azurerm**.
+Para a gestão do estado dos recursos utilizados pela ***<empresa>***, vamos utilizar o provedor da **Azure**, sendo assim a configuração do gestor de estado remoto que escolheremos para ser utilizado no terraform será o **azurerm**.
 
 ### Configurando o Backend repositorio
 
