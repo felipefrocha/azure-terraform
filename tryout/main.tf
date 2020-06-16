@@ -60,11 +60,11 @@ resource "azurerm_network_security_group" "nsg" {
 
 # Create network interface
 resource "azurerm_network_interface" "nic" {
-  name                      = "${var.prefix}NIC"
-  location                  = var.location
-  resource_group_name       = azurerm_resource_group.rg.name
-#  network_security_group_id = azurerm_network_security_group.nsg.id
-  tags                      = var.tags
+  name                = "${var.prefix}NIC"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  #  network_security_group_id = azurerm_network_security_group.nsg.id
+  tags = var.tags
 
   ip_configuration {
     name                          = "${var.prefix}NICConfg"
@@ -115,31 +115,31 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 
-    provisioner "file" {
-        connection {
-            type     = "ssh"
-            host     = azurerm_public_ip.publicip.ip_address
-            user     = var.admin_username
-            password = var.admin_password
-        }
-
-        source      = "newfile.txt"
-        destination = "newfile.txt"
+  provisioner "file" {
+    connection {
+      type     = "ssh"
+      host     = azurerm_public_ip.publicip.ip_address
+      user     = var.admin_username
+      password = var.admin_password
     }
 
-    provisioner "remote-exec" {
-        connection {
-            type     = "ssh"
-            host     = azurerm_public_ip.publicip.ip_address
-            user     = var.admin_username
-            password = var.admin_password
-        }
+    source      = "newfile.txt"
+    destination = "newfile.txt"
+  }
 
-        inline = [
-        "ls -a",
-        "cat newfile.txt"
-        ]
+  provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      host     = azurerm_public_ip.publicip.ip_address
+      user     = var.admin_username
+      password = var.admin_password
     }
+
+    inline = [
+      "ls -a",
+      "cat newfile.txt"
+    ]
+  }
 
 }
 

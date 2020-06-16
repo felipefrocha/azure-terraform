@@ -3,3 +3,5 @@ teste
 
 .terraform
 terraform.tfstate
+
+.idea
