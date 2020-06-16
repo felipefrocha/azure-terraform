@@ -57,7 +57,24 @@ resource "azurerm_container_group" "container" {
 
     environment_variables = {
       COSMOS_DB_ENDPOINT   = azurerm_cosmosdb_account.cosmosdb.endpoint
-      COSMOS_DB_MASTER_KEY = azurerm_cosmosdb_account.cosmosdb.primary_master_key
+      COSMOS_DB_MASTERKEY = azurerm_cosmosdb_account.cosmosdb.primary_master_key
+    }
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
+  }
+
+  container {
+    name   = "hello-world"
+    image  = "microsoft/azure-vote-front:cosmosdb"
+    cpu    = "0.5"
+    memory = "1.5"
+
+    environment_variables = {
+      COSMOS_DB_ENDPOINT   = azurerm_cosmosdb_account.cosmosdb.endpoint
+      COSMOS_DB_MASTERKEY = azurerm_cosmosdb_account.cosmosdb.primary_master_key
     }
 
     ports {
